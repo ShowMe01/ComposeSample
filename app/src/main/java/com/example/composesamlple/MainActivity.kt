@@ -44,27 +44,8 @@ fun Content() {
                 .clip(RoundedCornerShape(30.dp, 30.dp))
                 .background(Color(20, 20, 20, 255))
         ) {
-            Column(
-                Modifier
-                    .padding(0.dp, 10.dp, 0.dp, 0.dp)
-                    .align(Alignment.CenterHorizontally)
-                    .height(4.dp)
-                    .width(28.dp)
-                    .clip(RoundedCornerShape(30.dp))
-                    .background(Color(255, 255, 255, 51))
-            ) {
-
-            }
-            Text(
-                text = "点赞",
-                modifier = Modifier
-                    .align(Alignment.CenterHorizontally)
-                    .padding(top = 15.dp),
-                fontSize = 16.sp,
-                color = Color.White,
-                fontWeight = FontWeight.Bold,
-            )
-
+            TopBar()
+            PageTitle("点赞")
             val likeList = listOf(
                 LikeData(
                     name = "cap._.ko",
@@ -129,13 +110,46 @@ fun Content() {
                                 text = data.timeDesc,
                                 fontSize = 13.sp,
                                 color = Color(1f, 1f, 1f, 1f * 0.4f),
-                                modifier = Modifier.background(Color.Blue)                                    .offset(y = (-4.5f).dp)
+                                modifier = Modifier
+                                    .background(Color.Blue)
+                                    .offset(y = (-4.5f).dp)
                             )
                         }
                     }
                 }
             }
         }
+    }
+}
+
+@Composable
+private fun TopBar() {
+    Column(Modifier.fillMaxWidth()) {
+        Column(
+            Modifier
+                .padding(0.dp, 10.dp, 0.dp, 0.dp)
+                .align(Alignment.CenterHorizontally)
+                .height(4.dp)
+                .width(28.dp)
+                .clip(RoundedCornerShape(30.dp))
+                .background(Color(255, 255, 255, 51))
+        ) {
+        }
+    }
+}
+
+@Composable
+private fun PageTitle(title: String) {
+    Column(Modifier.fillMaxWidth()) {
+        Text(
+            text = title,
+            modifier = Modifier
+                .align(Alignment.CenterHorizontally)
+                .padding(top = 15.dp),
+            fontSize = 16.sp,
+            color = Color.White,
+            fontWeight = FontWeight.Bold,
+        )
     }
 }
 
