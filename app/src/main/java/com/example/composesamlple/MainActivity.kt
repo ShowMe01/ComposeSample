@@ -1,23 +1,28 @@
 package com.example.composesamlple
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.Button
 import androidx.compose.material.Text
-import androidx.compose.runtime.Composable
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.modifier.modifierLocalConsumer
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -27,10 +32,32 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            Content()
+//            Content()
+//            Tip(text = "能发给同学啦~")
+            ClickText()
         }
     }
 
+}
+
+@SuppressLint("UnrememberedMutableState")
+@Composable
+fun ClickText() {
+    var time by mutableStateOf(1)
+    Column(Modifier.fillMaxWidth()) {
+        Button(onClick = {
+            time++
+        }, modifier = Modifier.align(Alignment.CenterHorizontally)
+            .width(80.dp)) {
+            Text(
+                text = time.toString(),
+                fontSize = 14.sp,
+                color = Color.White,
+                fontWeight = FontWeight.Bold,
+            )
+        }
+
+    }
 }
 
 @Composable
@@ -153,6 +180,36 @@ private fun PageTitle(title: String) {
     }
 }
 
+@Composable
+fun Tip(text: String) {
+    Box(Modifier.fillMaxWidth()) {
+        Image(
+            rememberImagePainter("https://s.momocdn.com/s1/u/ehbehgfg/tip_bg.png"),
+            contentDescription = null,
+            Modifier
+                .align(Alignment.Center)
+                .width(140.dp)
+                .height(49.dp)
+        )
+
+        Box(
+            Modifier
+                .align(Alignment.Center)
+                .width(140.dp)
+                .height(49.dp)
+                .padding(bottom = 4.dp)
+        ) {
+            Text(
+                text = text,
+                modifier = Modifier.align(Alignment.Center),
+                fontWeight = FontWeight.Bold,
+                color = Color.Black,
+                textAlign = TextAlign.Center,
+            )
+        }
+    }
+}
+
 data class LikeData(
     val name: String,
     val avatar: String,
@@ -169,5 +226,7 @@ fun Greeting(name: String) {
 @Preview
 @Composable
 fun PreviewGreeting() {
-    Content()
+//    Content()
+//    Tip(text = "能发给同学啦~")
+    ClickText()
 }
